@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta name="description" content="Atlassian Coding Challenge" />
+		<link href="bower_components/jquery-ui/themes/cupertino/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+		<link href="styles/main.css" rel="stylesheet" type="text/css" />
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+		<script src="dist/chatMessage.min.js"></script>
+		<meta charset="utf-8">
+		<title>Atlassian Coding Challenge</title>
+	</head>
+	<body>
+		<div class="header ui-widget ui-widget-header">Atlassian Coding Challenge - v1.0.0 - David Shaevel</div>
+		<div class="content ui-widget ui-widget-content">
+			<div id="accordion">
+				<h3>Solution</h3>
+				<div id="solution-container">
+					<div class="solution-form ui-widget ui-widget-content">
+						<form id="parseChatMessageForm">
+							<div class="form-section">
+								<label for="chatMessageText">Chat Message:</label>
+								<span>&nbsp;</span>
+								<input id="chatMessageText" name="chatMessageText" type="text" />
+							</div>
+
+							<div class="spacer">&nbsp;</div>
+
+							<div class="form-section">
+								<button id="submitButton">Submit</button>
+								<button id="clearMessageButton">Clear Messge</button>
+								<button id="clearResultsButton">Clear Results</button>
+							</div>
+						</form>
+					</div>
+
+					<div>&nbsp;</div>
+
+					<div class="parse-chat-message-results ui-widget ui-widget-content">
+						Results:
+						<div id="parseChatMessageResults"></div>
+					</div>
+				</div>
+				<h3>Description</h3>
+				<div id="description-container">
+					Please write, in your preferred language, code that takes a chat message string and returns
+					a JSON string containing information about its contents. Special content to look for includes:
+					<br/><br/>
+
+					1. <b>@mentions -</b> A way to mention a user. Always starts with an '@' and ends when hitting a
+					non-word character. (http://help.hipchat.com/knowledgebase/articles/64429-how-do-mentions-work-)
+					<br/><br/>
+
+					2. <b>Emoticons -</b> For this exercise, you only need to consider 'custom' emoticons which are ASCII
+					strings, no longer than 15 characters, contained in parenthesis. You can assume that anything
+					matching this format is an emoticon. (http://hipchat-emoticons.nyh.name)
+					<br/><br/>
+
+					3. <b>Links -</b> Any URLs contained in the message, along with the page's title.
+					<br/><br/>
+
+					For example, calling your function with the following inputs should result in the corresponding return values.
+					<br/><br/>
+
+					Input: "@chris you around?"<br/>
+					Return (string):<br/>
+					{<br/>
+					&nbsp;&nbsp;"mentions": [<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;"chris"<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;]<br/>
+					}<br/><br/>
+
+					Input: "Good morning! (megusta) (coffee)"<br/>
+					Return (string):<br/>
+					{<br/>
+					&nbsp;&nbsp;"emoticons": [<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;"megusta",<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;"coffee"<br/>
+					&nbsp;]<br/>
+					}<br/><br/>
+
+					Input: "Olympics are starting soon; http://www.nbcolympics.com"<br/>
+					Return (string):<br/>
+					{<br/>
+					&nbsp;&nbsp;"links": [<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url": "http://www.nbcolympics.com",<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"title": "NBC Olympics | Home of the 2016 Olympic Games in Rio"<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;]<br/>
+					}<br/><br/>
+
+
+					Input: "@bob @john (success) such a cool feature; https://twitter.com/jdorfman/status/430511497475670016"<br/>
+					Return (string):<br/>
+					{<br/>
+					&nbsp;&nbsp;"mentions": [<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;"bob",<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;"john"<br/>
+					&nbsp;&nbsp;],<br/>
+					&nbsp;&nbsp;"emoticons": [<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;"success"<br/>
+					&nbsp;&nbsp;]<br/>
+					&nbsp;&nbsp;"links": [<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"url": "https://twitter.com/jdorfman/status/430511497475670016",<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"title": "Twitter / jdorfman: nice @littlebigdetail from ..."<br/>
+					&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+					&nbsp;&nbsp;]<br/>
+					}<br/>
+				</div>
+			</div>
+
+		</div>
+		<script>
+			$(function() {
+				$('#accordion').accordion({
+					collapsible: true,
+					heightStyle: 'content'
+				});
+
+				$('#submitButton').button().on('click', function() {
+					// default button logic...submits the form
+				});
+
+				$('#clearMessageButton').button().on('click', function(e) {
+					e.preventDefault();
+					$('input[name="chatMessageText"]').val('');
+				});
+
+				$('#clearResultsButton').button().on('click', function(e) {
+					e.preventDefault();
+					$('#parseChatMessageResults').html('');
+				});
+
+				$('form#parseChatMessageForm').submit(function(e) {
+					e.preventDefault();
+
+					$('#parseChatMessageResults').append('<br/>');
+
+					var msg = $('input[name="chatMessageText"]').val();
+					$.when(ChatMessage.parseString(msg)).done(
+						function() {
+							var result = ChatMessage.getResult();
+							$('#parseChatMessageResults').append('<hr/>' + msg + '<pre>' + result + '</pre><hr/>');
+						}
+					);
+				});
+			});
+		</script>
+	</body>
+</html>

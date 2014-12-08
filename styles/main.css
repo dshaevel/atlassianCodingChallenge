@@ -1,0 +1,29 @@
+.header, .content {
+	padding: 5px;
+	width: 98%;
+}
+
+.content {
+	padding: 5px;
+	font-size: 0.9em;
+	width: 98%;
+}
+
+div.solution-form {
+	padding: 5px;
+}
+
+div.form-section label, #submitButton, #clearMessageButton, #clearResultsButton {
+	font-size: 0.8em;
+	font-weight: bold;
+}
+
+div.form-section input[type="text"] {
+	font-size: 0.8em;
+	width: 300px;
+}
+
+div.parse-chat-message-results {
+	font-size: 0.9em;
+	padding: 5px;
+}

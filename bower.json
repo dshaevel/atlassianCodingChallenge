@@ -1,0 +1,14 @@
+{
+  "name": "atlassianCodingChallenge",
+  "description": "Atlassian Coding Challenge",
+  "version": "1.0.0",
+  "authors": [
+    "David Shaevel"
+  ],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test"
+  ]
+}
