@@ -1,9 +1,9 @@
-# Atlassian Coding Challenge - v1.0.0 - David Shaevel
+# Atlassian Coding Challenge - v1.1.0 - David Shaevel
 ### 12/8/2014
 
 ---
 
-#Description
+## Description
 
 > Please write, in your preferred language, code that takes a chat message string and returns a JSON string containing information about its contents. Special content to look for includes:
 
@@ -72,14 +72,14 @@ For example, calling your function with the following inputs should result in th
 
 ---
 
-#Solution 
+## Solution 
 
-###Step One:
+### Step One:
 * Get project infrastructure set up:
     * TDD with Jasmine
     * Test execution Grunt and Karma
 
-###Step Two:
+### Step Two:
 * Stub out the parseString() function in a ChatMessage module
 * Create Jasmine test suite for ChatMessage module
     * Create mock message string data:
@@ -93,7 +93,7 @@ For example, calling your function with the following inputs should result in th
         * should parse links
         * should parse everything
 
-###Step Three:
+### Step Three:
 * Implement the actual parseString() function logic:
     * Split message string into array of words
     * For each word, determine what is the content type:
@@ -107,7 +107,7 @@ For example, calling your function with the following inputs should result in th
 * Use Regular Expressions to determine the content type 
 * Make sure the solution can easily add new content types
 
-###Step Four:
+### Step Four:
 * Add grunt tasks to create a minified version of the ChatMessage file
     * clean
     * uglify
@@ -119,7 +119,12 @@ For example, calling your function with the following inputs should result in th
 
 ---
 
-#Usage
+## Installation and Test Execution
+
+    $ npm install
+    $ grunt test
+
+## Usage
 
     var msg = '@DavidShaevel http://davidshaevel.com (website)';
     $.when(ChatMessage.parseString(msg)).done(
@@ -130,6 +135,6 @@ For example, calling your function with the following inputs should result in th
 
 ---
 
-#Live Demo
+## Live Demo
 
-[http://jsbin.com/yupuja/3](http://jsbin.com/yupuja/3)
+[http://jsbin.com/yupuja/14](http://jsbin.com/yupuja/14)

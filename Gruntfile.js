@@ -11,7 +11,7 @@ module.exports = function(grunt) {
     },
     // Task configuration.
     clean: {
-      dist: ['<%= dir.dist %>/*']
+      dist: ['<%= dir.dist %>']
     },
     jshint: {
       files: [
@@ -61,6 +61,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
 
   // Default task.
-  grunt.registerTask('default', ['clean:dist', 'jshint', 'karma', 'uglify']);
+  grunt.registerTask('test', ['karma']);
+  grunt.registerTask('default', ['clean:dist', 'jshint', 'test', 'uglify']);
 
 };

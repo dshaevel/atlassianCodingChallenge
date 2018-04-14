@@ -90,14 +90,14 @@ describe("Chat Message", function() {
 
 	it("should parse input text and identify Links.", function() {
 		var mockJsonpResult = {
-		  "query": {
-		    "count": 1,
-		    "created": "2014-12-05T21:35:36Z",
-		    "lang": "en-US",
-		    "results": {
-		      "title": "NBC Olympics | Home of the 2016 Olympic Games in Rio"
-		    }
-		  }
+			"query": {
+				"count": 1,
+				"created": "2014-12-05T21:35:36Z",
+				"lang": "en-US",
+				"results": {
+					"result": "<title>NBC Olympics | Home of the 2016 Olympic Games in Rio</title>"
+				}
+			}
 		};
 		var d = $.Deferred();
 		d.resolve(mockJsonpResult);
@@ -115,7 +115,7 @@ describe("Chat Message", function() {
 				"created": "2014-12-05T21:35:36Z",
 				"lang": "en-US",
 				"results": {
-					"title": "Justin Dorfman on Twitter: \"nice @littlebigdetail from @HipChat (shows hex colors when pasted in chat). http://t.co/7cI6Gjy5pq\""
+					"result": "<title>Justin Dorfman on Twitter: \"nice @littlebigdetail from @HipChat (shows hex colors when pasted in chat). http://t.co/7cI6Gjy5pq\"</title>"
 				}
 			}
 		};

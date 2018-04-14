@@ -12,7 +12,8 @@ var ChatMessage = (function() {
 			dataType: "jsonp",
 			jsonp: "callback",
 			data: {
-				q: "select * from html where url='" + url + "' and xpath='//title'",
+				q: "select * from htmlstring where url='" + url + "' and xpath='//title'",
+				env: "store://datatables.org/alltableswithkeys",
 				format: "json"
 			},
 			timeout: 3000
@@ -21,8 +22,9 @@ var ChatMessage = (function() {
 			console.debug(JSON.stringify(data, null, 2));
 			if (data.query) {
 				if (data.query.results) {
-					if (data.query.results.title) {
-						var pageTitle = data.query.results.title;
+					if (data.query.results.result) {
+						var rslt = data.query.results.result;
+						var pageTitle = rslt.substring(7, rslt.length - 8);
 						deferred.resolve(pageTitle);
 					}
 				}
@@ -151,7 +153,7 @@ var ChatMessage = (function() {
 						//console.debug(JSON.stringify(_outputJsonObject, null, 2));
 					}
 				).then(
-					function() {
+				    function() {
 						fetchedPageCount++;
 						console.debug('parseString()::fetchedPageCount ==>' + fetchedPageCount);
 						console.debug('parseString()::linkCount ==>' + linkCount);
