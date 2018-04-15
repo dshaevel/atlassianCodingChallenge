@@ -3,6 +3,12 @@
   "description": "Atlassian Coding Challenge",
   "version": "1.1.0",
   "author": "David Shaevel",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/dshaevel/atlassianCodingChallenge/blob/master/LICENSE"
+    }
+  ],
   "devDependencies": {
     "grunt": "^1.0.2",
     "grunt-contrib-clean": "^1.1.0",
